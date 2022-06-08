@@ -2,6 +2,10 @@ import numpy as np
 import cv2 
 
 class Particle:
+    """The Particle is by default a Circle
+    With default thickness or Radius = 20
+    """
+
     def __init__(self, img, thickness = 20):
         self.img = img 
         self.thickness = thickness
@@ -20,7 +24,8 @@ class Histogram:
     def __init__(self,img, arr):
         self.img = img
         self.arr = arr
-        
+        self.color_register = {}
+
     def get_coords(self, t):
         """ 
         Argument [ t ]:
@@ -56,10 +61,17 @@ class Histogram:
 
     def draw(self, n1, n2):
         color = tuple((np.random.choice(range(256), size=3)))
-        #print(color, type(color))
-        cv2.rectangle(self.img, n1, n2, (int(color[0]), int(color[1]), int(color[2])) , -1)
+        if str(n1)+str(n2) in self.color_register:
+            print("RECT")
+            cv2.rectangle(self.img, n1, n2, (int(self.color_register[str(n1)+str(n2)][0]), int(self.color_register[str(n1)+str(n2)][1]), int(self.color_register[str(n1)+str(n2)][2])) , -1)
+        else:
+            self.color_register[str(n1)+str(n2)] = color
 
-    def __call__(self):
+        print(self.color_register)
+
+
+    def __call__(self, img):
+        self.img = img
         self.calc_hist()
     
     def calc_hist(self):
@@ -92,14 +104,17 @@ class Histogram:
             else:
                 d[i] = 1
         return list(d.values())
+initialised = False
 
 while True:
     a = np.zeros((600, 600, 3))
     n1 = np.random.randint(1, 400)
     n2 = np.random.randint(1, 400)
     #a = cv2.circle(a, (n1, n2), 20, (255, 0, 0), -1)
-    r = Histogram(a, [1, 1, 1, 1, 2, 2, 2, 3,3,3,3, 3, 3, 3])
-    r()
+    if not initialised:
+        r = Histogram(a, [1, 1, 1, 1, 2, 2, 2, 3,3,3,3, 3, 3, 3])
+        initialised = True
+    r(a)
     cv2.imshow("Plot", a)
     if cv2.waitKey(10) == 27:
         break
