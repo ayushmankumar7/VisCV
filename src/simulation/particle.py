@@ -5,14 +5,15 @@ class Particle:
     With default thickness or Radius = 20
     """
 
-    def __init__(self, img, thickness = 20):
-        self.img = img 
+    def __init__(self,thickness = 20, color = (255, 255, 255)): 
         self.thickness = thickness
+        self.color = color
         
     def draw(self):
-        cv2.circle(self.img, self.center, self.thickness, (255, 0, 0), -1)
+        cv2.circle(self.img, self.center, self.thickness, self.color, -1)
     
-    def __call__(self, center):
+    def __call__(self, img, center):
+        self.img = img
         if isinstance(center, tuple):
             self.center = center
         else:
