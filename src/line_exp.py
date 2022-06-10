@@ -4,16 +4,18 @@ import cv2
 from vector import Vector
 
 from utils.mouse import print_coord
+from utils import globals
 
-mouseX = 0
-mouseY = 0
 
-def print_coord(event,x,y,flags,param):
-    global mouseX, mouseY
-    if event == cv2.EVENT_MOUSEMOVE:
-        print(f'{x, y}\r', end="")
-        mouseX = x
-        mouseY = y
+globals.initialize_global_variables()
+
+#def print_coord(event,x,y,flags,param):
+#    global mouseX, mouseY
+#    if event == cv2.EVENT_MOUSEMOVE:
+#        print(f'{x, y}\r', end="")
+#        mouseX = x
+#        mouseY = y
+
 
 initialised = False
 
@@ -29,8 +31,7 @@ while True:
 
     a = np.zeros((width, height, 3))   
     
-    mouse = Vector(mouseX, mouseY)
-    mouse = mouse
+    mouse = Vector(globals.mouseX, globals.mouseY)
 
     cv2.line(a, (mouse.x, mouse.y),(center.x, center.y),  (255, 255, 255))
     
