@@ -21,7 +21,7 @@ center = Vector(width // 2, height // 2)
 
 while True:
     if not initialised:
-        t = TrackBar()
+        t = TrackBar(intend = 1, bar_type="verticle")
         initialised = True
 
     a = np.zeros((width, height, 3))   
