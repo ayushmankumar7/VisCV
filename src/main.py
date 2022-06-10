@@ -5,6 +5,10 @@ from simulation.particle import Particle
 
 from vector import Vector
 
+from utils.mouse import print_coord
+
+
+
 initialised = False
 
 
@@ -33,6 +37,7 @@ while True:
         p(a, (loc.x, loc.y))
         
         cv2.imshow("Plot", a)
+        cv2.setMouseCallback('Plot',print_coord)
         if cv2.waitKey(10) == 27:
             break
 
