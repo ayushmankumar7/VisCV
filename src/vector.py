@@ -41,7 +41,7 @@ class Vector:
         return v
         """
 
-        if isinstance(vector, type(self)):
+        if isinstance(scalar, type(self)):
             return "Please multiply a non Vector"
         else:
             return Vector(self.x/scalar, self.y/scalar)
