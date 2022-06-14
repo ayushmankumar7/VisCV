@@ -12,8 +12,8 @@ from utils.linear_intrep import lerp
 
 globals.initialize_global_variables()
 
-width = 800
-height = 800
+width = 600
+height = 1200
 
 
 p0 = Vector(0, width//2)
@@ -31,7 +31,7 @@ while True:
         y2 = lerp(p1.y, p2.y, i)
         x = lerp(x1, x2, i)
         y = lerp(y1, y2, i)
-        Point(a, int(x), int(y), 2)
+        # Point(a, int(x), int(y), 2)
         Line(a, int(x1), int(y1), int(x2), int(y2), 2)
     cv2.imshow("Plot", a)
     cv2.setMouseCallback('Plot',print_coord)
